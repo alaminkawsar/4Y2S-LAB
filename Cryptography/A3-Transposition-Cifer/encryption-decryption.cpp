@@ -37,7 +37,7 @@ string Encryption(string s,int w){
 string Decryption(string s,int w){
     string decrypted;
     int len = s.length();
-    int row = len+(len%w>0);
+    int row = len/w+(len%w>0);
     int k=0;
 
     for(int i=0;i<w;i++){
@@ -64,7 +64,7 @@ void solve()
     string s; getline(cin,s);
     string encrypted, decrypted;
     int width = 4; // cin>>width;
-    int Iteration=5; //cin>>Iteration
+    int Iteration=10; //cin>>Iteration
 
     // taking input
     cout<<s<<endl;
@@ -83,6 +83,7 @@ void solve()
         decrypted = Decryption(decrypted, width);
 
     }
+    //cout<<"test "<<s.size()<<' '<<decrypted.size()<<endl;
 
     printf("\nMain Message: ");
     cout<<s<<endl;
