@@ -10,14 +10,14 @@ string Encryption(string s,int w){
 
     string encrypted;
     int len = s.length();
-    int row=-1,col=0;
+    int row=0,col=0;
 
     for(int i=0;i<len;i++){
-        if(col%w==0){
+        mat[row][col++]=s[i];
+        if(col>=w){
             row++;
             col=0;
         }
-        mat[row][col++]=s[i];
     }
     // for(int i=0;i<=row;i++){
     //     for(int j=0;j<w;j++){
@@ -37,7 +37,7 @@ string Encryption(string s,int w){
 string Decryption(string s,int w){
     string decrypted;
     int len = s.length();
-    int row = (len+w-1)/w;
+    int row = len+(len%w>0);
     int k=0;
 
     for(int i=0;i<w;i++){
@@ -63,15 +63,26 @@ void solve()
     cout<<endl;
     string s; getline(cin,s);
     string encrypted, decrypted;
+    int width = 4; // cin>>width;
+    int Iteration=5; //cin>>Iteration
 
-    int widht = 4;
+    // taking input
     cout<<s<<endl;
 
     memset(mat,0,sizeof(mat));
 
-    encrypted = Encryption(s,widht);
-    decrypted = Decryption(decrypted, widht);
+    // Encryption Process number of Iteration times
+    encrypted=s;
+    for(int i=0;i<Iteration;i++){
+        encrypted = Encryption(encrypted,width);
+    }
 
+    // Decryption Process number of Iteration time
+    decrypted=encrypted;
+    for(int i=0;i<Iteration;i++){
+        decrypted = Decryption(decrypted, width);
+
+    }
 
     printf("\nMain Message: ");
     cout<<s<<endl;
