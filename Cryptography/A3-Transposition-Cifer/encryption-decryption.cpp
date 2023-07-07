@@ -1,30 +1,86 @@
 #include<bits/stdc++.h>
 #define MAX 100005
-#define pb push_back
-#define mp make_pair
-#define pii pair<long long,long long>
-#define vi vector<int>
-#define vl vector<long long>
-#define read(a) scanf("%d",&a)
-#define p1(a) cout<<"Check "<<a<<endl;
-#define p2(a,b) cout<<"Check "<<a<<' '<<b<<endl;
-#define fo(i,n) for (i=0;i<n;i++)
-#define ll long long
-#define clr(a,b) memset(a,b,sizeof(a))
-#define MOD 1000000007
 
 using namespace std;
 int const sz=(int)2e5+5;
+
+char mat[200][200];
+
+string Encryption(string s,int w){
+
+    string encrypted;
+    int len = s.length();
+    int row=-1,col=0;
+
+    for(int i=0;i<len;i++){
+        if(col%w==0){
+            row++;
+            col=0;
+        }
+        mat[row][col++]=s[i];
+    }
+    // for(int i=0;i<=row;i++){
+    //     for(int j=0;j<w;j++){
+    //         printf("%c",mat[i][j]);
+    //     }
+    //     printf("\n");
+    // }
+    for(int i=0;i<w;i++){
+        for(int j=0;j<=row;j++){
+            if(mat[j][i]==0) continue;
+            encrypted+=mat[j][i];
+        }
+    }
+    return encrypted;
+}
+
+string Decryption(string s,int w){
+    string decrypted;
+    int len = s.length();
+    int row = (len+w-1)/w;
+    int k=0;
+
+    for(int i=0;i<w;i++){
+        for(int j=0;j<row;j++){
+            if(mat[j][i]==0) continue;
+            mat[j][i]=s[k++];
+        }
+    }
+
+    for(int i=0;i<row;i++){
+        for(int j=0;j<w;j++){
+            //printf("%c",mat[i][j]);
+            decrypted+=mat[i][j];
+        }
+        //printf("\n");
+    }
+
+    return decrypted;
+}
 
 void solve()
 {
     cout<<endl;
     string s; getline(cin,s);
-    int widht = 0;
+    string encrypted, decrypted;
+
+    int widht = 4;
     cout<<s<<endl;
 
-    char mat[200][200];
+    memset(mat,0,sizeof(mat));
 
+    encrypted = Encryption(s,widht);
+    decrypted = Decryption(decrypted, widht);
+
+
+    printf("\nMain Message: ");
+    cout<<s<<endl;
+
+    printf("\nEncrypted Message: ");
+    cout<<encrypted<<endl;
+
+    printf("\nDecrypted Messge: ");
+    cout<<decrypted<<endl;
 
 
     
