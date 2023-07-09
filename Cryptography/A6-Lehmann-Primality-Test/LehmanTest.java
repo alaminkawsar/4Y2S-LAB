@@ -2,24 +2,24 @@ import java.math.BigInteger;
 import java.security.SecureRandom;
 
 public class LehmanTest {
-    BigInteger number,a,x,e;
+    BigInteger p,a,x,e;
 
     Boolean isPrime(String num){
-        number = new BigInteger(num);
+        p = new BigInteger(num);
         BigInteger ZERO = BigInteger.ZERO;
         BigInteger ONE = BigInteger.ONE;
         BigInteger TWO = BigInteger.TWO;
         Boolean flag=true;
         
-        if(number.mod(TWO).equals(ZERO)){
+        if(p.mod(TWO).equals(ZERO)){
             return false;
         }
-        e = number.subtract(ONE).divide(TWO);
+        e = p.subtract(ONE).divide(TWO);
         for(int i=0;i<50;i++){
-            a = getRandomBigInteger(number.subtract(ONE));
+            a = getRandomBigInteger(p);
             //System.out.println("random number: "+a);
-            x = a.modPow(e, number);
-            if((x.equals(ONE)) || x.equals(number.subtract(ONE))){
+            x = a.modPow(e, p);
+            if((x.equals(ONE)) || x.equals(p.subtract(ONE))){
                 continue;
             }else return false;
         }
@@ -29,7 +29,9 @@ public class LehmanTest {
     public static BigInteger getRandomBigInteger(BigInteger mx){
         SecureRandom secureRandom = new SecureRandom();
         BigInteger randBigInteger = new BigInteger(mx.bitLength(), secureRandom);
-        return randBigInteger.compareTo(mx)>=0? randBigInteger.mod(mx): randBigInteger;
+        randBigInteger = randBigInteger.mod(mx);
+        if(randBigInteger.equals(BigInteger.ZERO)) randBigInteger = BigInteger.TWO;
+        return randBigInteger;
     }
 
     

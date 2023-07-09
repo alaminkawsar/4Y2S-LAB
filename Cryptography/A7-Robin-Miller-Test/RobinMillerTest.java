@@ -7,7 +7,9 @@ public class RobinMillerTest {
         // factoring p by 2
         int b = 0;
         BigInteger temp = p.subtract(BigInteger.ONE);
-    
+        if(p.mod(BigInteger.TWO).equals(BigInteger.ZERO)){
+            return false;
+        }
         while(temp.mod(BigInteger.TWO).equals(BigInteger.ZERO)){
             temp=temp.divide(BigInteger.TWO);
             b++;
@@ -20,10 +22,9 @@ public class RobinMillerTest {
         int j = 0;
         BigInteger z = a.modPow(m, p);
         if (z.equals(BigInteger.ONE) || z.equals(p.subtract(BigInteger.ONE))){
-            //continue;
+            return true;
         }
         
-
         while(true){
             if(j>0 && z.equals(BigInteger.ONE)){
                 return false;
@@ -43,7 +44,9 @@ public class RobinMillerTest {
     public static BigInteger getRandomBigInteger(BigInteger mx){
         SecureRandom secureRandom = new SecureRandom();
         BigInteger randBigInteger = new BigInteger(mx.bitLength(), secureRandom);
-        return randBigInteger.compareTo(mx)>=0? randBigInteger.mod(mx): randBigInteger;
+        randBigInteger = randBigInteger.mod(mx);
+        if(randBigInteger.equals(BigInteger.ZERO)) randBigInteger = BigInteger.TWO;
+        return randBigInteger;
     }
 
 }

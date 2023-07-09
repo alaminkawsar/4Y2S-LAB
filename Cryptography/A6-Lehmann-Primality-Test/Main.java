@@ -1,8 +1,7 @@
-import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        String number = "4001160567659443111330503282468707739798413";
+        String number = "1000000009";
         // Scanner scan = new Scanner(System.in);
         // number = scan.nextLine();
         // scan.close();
