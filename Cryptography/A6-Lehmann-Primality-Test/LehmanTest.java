@@ -1,5 +1,6 @@
 import java.math.BigInteger;
 import java.security.SecureRandom;
+import java.util.Random;
 
 public class LehmanTest {
     BigInteger p,a,x,e;
@@ -16,7 +17,10 @@ public class LehmanTest {
         }
         e = p.subtract(ONE).divide(TWO);
         for(int i=0;i<50;i++){
-            a = getRandomBigInteger(p);
+            a = new BigInteger(p.bitLength()-1,new Random());
+            if(BigInteger.ONE.compareTo(a)<=1){
+                a = BigInteger.TWO;
+            }
             //System.out.println("random number: "+a);
             x = a.modPow(e, p);
             if((x.equals(ONE)) || x.equals(p.subtract(ONE))){
@@ -25,13 +29,6 @@ public class LehmanTest {
         }
 
         return flag;
-    }
-    public static BigInteger getRandomBigInteger(BigInteger mx){
-        SecureRandom secureRandom = new SecureRandom();
-        BigInteger randBigInteger = new BigInteger(mx.bitLength(), secureRandom);
-        randBigInteger = randBigInteger.mod(mx);
-        if(randBigInteger.equals(BigInteger.ZERO)) randBigInteger = BigInteger.TWO;
-        return randBigInteger;
     }
 
     
