@@ -45,15 +45,17 @@ public class RSA{
         System.out.println("Encryption Message:");
         for(int i=0;i<len;i+=3){
             // padding message if need;
-            String subString="";
-            if(i+3>len){
-                for(int j=0;j<pad;j++) subString+="0";
-                subString+=message.substring(i,len);
+            String block="";
+
+            // handle last block
+            if(i+blockSize>len){
+                for(int j=0;j<pad;j++) block+="0";
+                block+=message.substring(i,len);
             }
             else{
-                subString = message.substring(i, i+3);
+                block = message.substring(i, i+3);
             }
-            msg = new BigInteger(subString);
+            msg = new BigInteger(block);
             BigInteger c = msg.modPow(e,n);
             String temp = c.toString();
             list.add(temp);
