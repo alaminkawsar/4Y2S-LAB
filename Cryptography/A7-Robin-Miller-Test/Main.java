@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        String number = "3737373737373737373737373737373737373737373737373737373737373737373737373743434343434343434343434343434343434343434343434343434343434343434343434343434343434343";
+        String number = "101";
         // Scanner scan = new Scanner(System.in);
         // number = scan.nextLine();
         // scan.close();

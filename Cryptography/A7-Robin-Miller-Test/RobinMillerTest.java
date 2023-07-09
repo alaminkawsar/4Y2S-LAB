@@ -15,8 +15,7 @@ public class RobinMillerTest {
             temp=temp.divide(BigInteger.TWO);
             b++;
         }
-        temp = p.subtract(BigInteger.ONE);
-        BigInteger m = temp.divide(BigInteger.TWO.pow(b));
+        BigInteger m = temp;
 
         // take a less than p
         BigInteger a = new BigInteger(p.bitLength()-1, new Random());
