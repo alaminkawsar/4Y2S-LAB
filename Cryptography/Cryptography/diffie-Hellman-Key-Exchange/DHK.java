@@ -3,27 +3,27 @@ import java.util.Random;
 
 public class DHK{
     public static void main(String[] args) {
-        BigInteger P, G, a, b, x, y, Ka, Kb;
+        BigInteger P, a, b, Xa, Xb,Ya,Yb, Ka, Kb;
 
         P = BigInteger.probablePrime(10, new Random());
-        G = BigInteger.probablePrime(10, new Random());
-        System.out.println(P+" "+G);
+        a = BigInteger.probablePrime(10, new Random());
 
-        System.out.println("\nP = "+P+" G = "+G);
+        System.out.println("\nP = "+P+" @ = "+a);
         
         //define private key a,  b
-        a = BigInteger.valueOf(123);
-        b = BigInteger.valueOf(234);
-        System.out.println("\nPrivate Key a = "+a+",  b = "+b);
-        // key generate
-        x = G.modPow(a, P);
-        y = G.modPow(b, P);
+        Xa = BigInteger.valueOf(123);
+        Xb = BigInteger.valueOf(234);
 
-        System.out.println("\nGenerated Key x = "+x+",  y = "+y);
+        // System.out.println("\nPrivate Key a = "+a+",  b = "+b);
+        // key generate
+        Ya = a.modPow(Xa, P);
+        Yb = a.modPow(Xb, P);
+
+        //System.out.println("\nGenerated Key x = "+Xa+",  y = "+Xb);
 
         //generate secrete key
-        Ka = y.modPow(a, P);
-        Kb = x.modPow(b, P);
+        Ka = Yb.modPow(Xa, P);
+        Kb = Ya.modPow(Xb, P);
 
         System.out.println("\nPrivate Key Ka = "+Ka+",  Kb = "+Kb);
         System.out.println();
