@@ -48,8 +48,19 @@ void solve()
         int u = q.front(); q.pop();
         //cout<<u<<": ";
         if(adj[u].size()>1){
-            code[adj[u][0]]=code[u]+"1";
-            code[adj[u][1]]=code[u]+"0";
+            int left = adj[u][0];
+            int right = adj[u][1];
+            if(adj[right].size()>1){
+                code[right]+=code[u]+"1";
+                code[left]+=code[u]+"0";
+            }else if(adj[left].size()>1){
+                code[right]+=code[u]+"0";
+                code[left]+=code[u]+"1";
+            }else {
+                code[right]+=code[u]+"1";
+                code[left]+=code[u]+"0";
+            }
+            
             q.push(adj[u][0]);
             q.push(adj[u][1]);
         }
@@ -59,22 +70,17 @@ void solve()
         if(it.first>255) continue;
         //printf("%c=%s\n",it.first,it.second.c_str());
         string res;
-        res+=int(it.first);
+        res+=it.first;
         res+=int(':');
-        for(auto ch:it.second){
-            res+=ch;
-        }
+        res+=it.second;
         cout<<res<<endl;
     }
     cout<<endl;
+
+    // Hello er output
     for(int i=0;i<s.size();i++){
         string cd = code[int(s[i])];
-        // cout<<cd<<endl;
-        string wr;
-        for(int j=0;j<cd.size();j++){
-            wr+=cd[j];
-        }
-        cout<<wr<<' ';
+        cout<<cd<<' ';
     }
 
     

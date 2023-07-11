@@ -29,14 +29,14 @@ struct encode
 void solve()
 {
     // Taking input
-    string input = "CAEE$";
+    string input = "CAEECAEEECCCBBBDDDAAAEEEECCCB$";
     char ch;
     double prob,prev=0;
     int index=0;
     map<char,int>has;
     int newVal=0;
     while(cin>>ch>>prob){
-        if(has.count(ch)==0) has[ch]=newVal++;
+        has[ch]=newVal++;
         data[has[ch]].ch = ch;
         data[has[ch]].prob=prob;
         data[has[ch]].low = prev;
@@ -56,7 +56,6 @@ void solve()
     double low = 0.0, high = 1.0, range = 1.0;
     for(int i = 0;i<input.size();i++){
         int k = has[input[i]];
-
         high = low + range*data[k].high;
         low = low + range*data[k].low;
         range = high-low;
@@ -67,7 +66,7 @@ void solve()
 
     string code = "0.";
     int k=1;
-    double val = 0;
+    long double val = 0;
     while(val<low){
         if(val+pow(2,-k)<high){
             code+="1";
